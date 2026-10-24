@@ -1,0 +1,19 @@
+name: validate
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.3.0
+          use-dotnet: false
+      - name: Import
+        run: godot --headless --path . --import || true
+      - name: Smoke test
+        run: godot --headless --path . --script tests/smoke.gd

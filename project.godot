@@ -1,0 +1,29 @@
+; godot-game-kit — hub / integration demo
+; A minimal Godot project that pulls the four shared kits in as submodules under
+; addons/ and validates that they integrate. Open it in Godot 4 to explore the
+; services, or run the headless smoke test (see README / CI).
+
+config_version=5
+
+[application]
+
+config/name="godot-game-kit"
+config/description="Integration hub for the shared Godot game kits."
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[autoload]
+
+EventBus="*res://addons/core/event_bus.gd"
+SceneManager="*res://addons/core/scene_manager.gd"
+AudioManager="*res://addons/core/audio_manager.gd"
+SaveManager="*res://addons/core/save_manager.gd"
+Localization="*res://addons/core/localization.gd"
+Debug="*res://addons/core/debug_overlay.gd"
+
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/core/plugin.cfg", "res://addons/settings_kit/plugin.cfg", "res://addons/inventory_kit/plugin.cfg", "res://addons/components_kit/plugin.cfg")
