@@ -46,7 +46,7 @@ for repo in $KITS; do
     git rm -rqf . >/dev/null 2>&1 || true
     cp -R "$work/addons" ./addons
     git add addons
-    git -c user.name="$OWNER" commit -qm "Asset Library layout ($VERSION)" || true
+    git -c user.name="DuckenClaw" -c user.email="sen@duckenclaw.xyz" commit -qm "Asset Library layout ($VERSION)" || true
     git tag -f "$VERSION" >/dev/null
     git checkout - >/dev/null 2>&1 || git checkout main
     rm -rf "$work"
