@@ -9,6 +9,7 @@ config_version=5
 
 config/name="godot-game-kit"
 config/description="Integration hub for the shared Godot game kits."
+config/icon="res://icon.png"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [autoload]
