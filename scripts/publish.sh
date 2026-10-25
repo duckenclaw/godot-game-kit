@@ -11,6 +11,7 @@
 # URLs, and publishes the hub. Requires an authenticated `gh` CLI.
 #
 # Safe to re-run: existing repos are skipped for creation and just pushed.
+# Written for bash 3.2 (macOS default) — no associative arrays.
 set -euo pipefail
 
 OWNER="${1:-duckenclaw}"
@@ -20,23 +21,29 @@ VERSION="v1.0.0"
 HUB="$(cd "$(dirname "$0")/.." && pwd)"
 WS="$(dirname "$HUB")"
 
-KITS=(godot-core godot-settings-kit godot-inventory-kit godot-components-kit godot-fps-controller)
+KITS="godot-core godot-settings-kit godot-inventory-kit godot-components-kit godot-fps-controller"
+# The four shared kits that this hub wires as submodules under addons/.
+SHARED="godot-core godot-settings-kit godot-inventory-kit godot-components-kit"
 
-# plugin dir name per kit repo, for submodule URL rewrite
-declare -A PLUGIN=(
-  [godot-core]=core
-  [godot-settings-kit]=settings_kit
-  [godot-inventory-kit]=inventory_kit
-  [godot-components-kit]=components_kit
-)
+# Map a kit repo name to its addon (plugin) directory name.
+plugin_for() {
+  case "$1" in
+    godot-core)           echo core ;;
+    godot-settings-kit)   echo settings_kit ;;
+    godot-inventory-kit)  echo inventory_kit ;;
+    godot-components-kit) echo components_kit ;;
+    godot-fps-controller) echo fps_controller ;;
+    *) echo "unknown" ;;
+  esac
+}
 
 echo "About to publish to github.com/$OWNER as $VIS repos:"
-printf '  - %s\n' "${KITS[@]}" "godot-game-kit"
+for r in $KITS godot-game-kit; do echo "  - $r"; done
 read -r -p "Proceed? [y/N] " ans
 [ "$ans" = "y" ] || { echo "aborted"; exit 1; }
 
 create_and_push() {
-  local dir="$1" name="$2"
+  dir="$1"; name="$2"
   ( cd "$dir"
     git tag -f "$VERSION" >/dev/null
     if gh repo view "$OWNER/$name" >/dev/null 2>&1; then
@@ -51,14 +58,14 @@ create_and_push() {
   )
 }
 
-for repo in "${KITS[@]}"; do
+for repo in $KITS; do
   create_and_push "$WS/$repo" "$repo"
 done
 
 echo "Re-pointing hub submodules at GitHub URLs..."
 cd "$HUB"
-for repo in "${!PLUGIN[@]}"; do
-  name="${PLUGIN[$repo]}"
+for repo in $SHARED; do
+  name="$(plugin_for "$repo")"
   git config -f .gitmodules "submodule.addons/$name.url" "https://github.com/$OWNER/$repo.git"
 done
 git submodule sync

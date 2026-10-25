@@ -12,6 +12,7 @@
 # Library submission at that branch/tag.
 #
 # Run AFTER publish.sh (needs the repos to exist to push). Requires `gh`.
+# Written for bash 3.2 (macOS default) — no associative arrays.
 set -euo pipefail
 
 OWNER="${1:-duckenclaw}"
@@ -19,16 +20,21 @@ VERSION="assetlib-v1.0.0"
 HUB="$(cd "$(dirname "$0")/.." && pwd)"
 WS="$(dirname "$HUB")"
 
-declare -A PLUGIN=(
-  [godot-core]=core
-  [godot-settings-kit]=settings_kit
-  [godot-inventory-kit]=inventory_kit
-  [godot-components-kit]=components_kit
-  [godot-fps-controller]=fps_controller
-)
+KITS="godot-core godot-settings-kit godot-inventory-kit godot-components-kit godot-fps-controller"
 
-for repo in "${!PLUGIN[@]}"; do
-  name="${PLUGIN[$repo]}"
+plugin_for() {
+  case "$1" in
+    godot-core)           echo core ;;
+    godot-settings-kit)   echo settings_kit ;;
+    godot-inventory-kit)  echo inventory_kit ;;
+    godot-components-kit) echo components_kit ;;
+    godot-fps-controller) echo fps_controller ;;
+    *) echo "unknown" ;;
+  esac
+}
+
+for repo in $KITS; do
+  name="$(plugin_for "$repo")"
   dir="$WS/$repo"
   echo "[$repo] building assetlib layout addons/$name/"
   ( cd "$dir"
