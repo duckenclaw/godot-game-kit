@@ -1,12 +1,12 @@
 [submodule "addons/core"]
 	path = addons/core
-	url = /Users/duckenclaw/Documents/gamedev/godot-projects/godot-game-kit-workspace/godot-core
+	url = https://github.com/duckenclaw/godot-core.git
 [submodule "addons/settings_kit"]
 	path = addons/settings_kit
-	url = /Users/duckenclaw/Documents/gamedev/godot-projects/godot-game-kit-workspace/godot-settings-kit
+	url = https://github.com/duckenclaw/godot-settings-kit.git
 [submodule "addons/inventory_kit"]
 	path = addons/inventory_kit
-	url = /Users/duckenclaw/Documents/gamedev/godot-projects/godot-game-kit-workspace/godot-inventory-kit
+	url = https://github.com/duckenclaw/godot-inventory-kit.git
 [submodule "addons/components_kit"]
 	path = addons/components_kit
-	url = /Users/duckenclaw/Documents/gamedev/godot-projects/godot-game-kit-workspace/godot-components-kit
+	url = https://github.com/duckenclaw/godot-components-kit.git
