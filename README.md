@@ -17,9 +17,21 @@ Each kit is its own repository (root-layout, so it drops straight into a project
 | **Inventory Kit** | [godot-inventory-kit](https://github.com/duckenclaw/godot-inventory-kit) | `ItemResource`, `ItemDB`, grid `Inventory`, `InventorySlot` |
 | **Components Kit** | [godot-components-kit](https://github.com/duckenclaw/godot-components-kit) | `Health`, `StateMachine` + `State` base |
 
-The genre controllers (e.g. [godot-fps-controller](https://github.com/duckenclaw/godot-fps-controller))
-live in their own repos too and depend on the four shared kits; each per-genre
-template repo pulls the shared kits + its own controller.
+## Genre controllers & templates
+
+Each genre has a controller addon (its own repo, depends on the shared kits) and a
+ready-to-use **GitHub template** that pulls the shared kits + its controller as
+submodules. Click *Use this template* to start a game.
+
+| Genre | Controller addon | Template (Use this template) |
+|-------|------------------|------------------------------|
+| **FPS** | [godot-fps-controller](https://github.com/duckenclaw/godot-fps-controller) — movement states, camera, hands/viewmodel, grab, projectile; modular mechanics | [fps-godot-template](https://github.com/duckenclaw/fps-godot-template) |
+| **2D sidescroller** | [godot-platformer-controller-2d](https://github.com/duckenclaw/godot-platformer-controller-2d) — state machine + comprehensive animation controller (idle/run/jump/fall/roll/attack-combo/block/wall-slide/hurt/death); modular mechanics | [sidescroller-godot-template](https://github.com/duckenclaw/sidescroller-godot-template) |
+| **Third-person** | *planned* | *planned* |
+| **Top-down** | *planned* | *planned* |
+
+Both controllers share the same modular-mechanics design: toggle abilities via
+config flags, or delete a state node from the `StateMachine` to remove a mechanic.
 
 ## Use the kits in your game
 
@@ -59,10 +71,10 @@ See [`scripts/`](scripts/) and the roadmap below.
 ## Roadmap
 
 - [x] **Phase 1** — split the FPS template into five addons in place.
-- [x] **Phase 2 (local)** — extract shared kits into standalone repos (root layout, history via `git subtree split`), scaffold this hub with submodules + smoke test.
-- [ ] **Phase 2 (publish)** — run `scripts/publish.sh`, submit kits to the Asset Library.
-- [ ] **Phase 3** — convert the FPS template repo to consume the kits as submodules; make it a GitHub template repo.
-- [ ] **Phase 4** — new per-genre templates (third-person, 2D sidescroller, top-down), each with its own controller + the shared kits.
+- [x] **Phase 2** — extract shared kits into standalone repos (root layout, history via `git subtree split`); publish them (main + `v*` tags + `assetlib` branches).
+- [x] **Phase 3** — FPS template consumes the kits as submodules; published as a GitHub template.
+- [~] **Phase 4** — per-genre templates. **Done:** FPS, 2D sidescroller. **Planned:** third-person, top-down.
+- [ ] Submit the shared kits + genre controllers to the Godot Asset Library (branches/SHAs ready; see `docs/asset-library.md`).
 
 ## License
 
