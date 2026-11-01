@@ -28,9 +28,9 @@ submodules. Click *Use this template* to start a game.
 | **FPS** | [godot-fps-controller](https://github.com/duckenclaw/godot-fps-controller) — movement states, camera, hands/viewmodel, grab, projectile; modular mechanics | [fps-godot-template](https://github.com/duckenclaw/fps-godot-template) |
 | **2D sidescroller** | [godot-platformer-controller-2d](https://github.com/duckenclaw/godot-platformer-controller-2d) — state machine + comprehensive animation controller (idle/run/jump/fall/roll/attack-combo/block/wall-slide/hurt/death); modular mechanics | [sidescroller-godot-template](https://github.com/duckenclaw/sidescroller-godot-template) |
 | **Third-person** | *planned* | *planned* |
-| **Top-down** | *planned* | *planned* |
+| **Top-down** | [godot-topdown-controller](https://github.com/duckenclaw/godot-topdown-controller) — 3D world with a 3D-model or 2.5D-sprite look (sprites lit and casting real shadows), camera rig (perspective/ortho, zoom, 45° rotation), dodge roll, melee combo, mouse/right-stick aim; modular mechanics | [topdown-godot-template](https://github.com/duckenclaw/topdown-godot-template) |
 
-Both controllers share the same modular-mechanics design: toggle abilities via
+All three controllers share the same modular-mechanics design: toggle abilities via
 config flags, or delete a state node from the `StateMachine` to remove a mechanic.
 
 ## Use the kits in your game
@@ -73,7 +73,7 @@ See [`scripts/`](scripts/) and the roadmap below.
 - [x] **Phase 1** — split the FPS template into five addons in place.
 - [x] **Phase 2** — extract shared kits into standalone repos (root layout, history via `git subtree split`); publish them (main + `v*` tags + `assetlib` branches).
 - [x] **Phase 3** — FPS template consumes the kits as submodules; published as a GitHub template.
-- [~] **Phase 4** — per-genre templates. **Done:** FPS, 2D sidescroller. **Planned:** third-person, top-down.
+- [~] **Phase 4** — per-genre templates. **Done:** FPS, 2D sidescroller, top-down. **Planned:** third-person.
 - [ ] Submit the shared kits + genre controllers to the Godot Asset Library (branches/SHAs ready; see `docs/asset-library.md`).
 
 ## License
